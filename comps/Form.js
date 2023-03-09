@@ -17,10 +17,12 @@ const Form = ({tasksList,setTaskList}) => {
            
           });
           const updateTasksList = tasksList.filter((taskState) => {
+            console.log(taskState.selected)
             if (taskState.selected === false) {
               return taskState;
             }
           });
+          console.log(updateTasksList);
           setTaskList(updateTasksList);
        
     }

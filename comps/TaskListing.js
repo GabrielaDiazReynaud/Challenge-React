@@ -1,9 +1,15 @@
 import TaskItem from "./TaskItem";
-const  TaskListing = () => {
+const  TaskListing = ({tasksList ,setTaskList}) => {
     return ( 
         <div className="scrollContainer">
         <div >
-            <TaskItem ></TaskItem>
+            {tasksList.map((taskState) => (
+            <TaskItem
+              key={taskState.id}
+              task={taskState.task}
+              selected={taskState.selected}
+            />
+          ))}
         </div>
     </div>
      );

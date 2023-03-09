@@ -10,23 +10,15 @@ import axios from "axios";
 const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   const [tasksList, setTaskList] = useState([]);
-  // const getList = async () => {
-  //   try {
-  //     const res = await fetch(`https://us-central1-challenge-app-eb721.cloudfunctions.net/helloWorld/tasks`);
-  //     const data = await res.json();
-  //     return data;
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
   useEffect(()=>{
     axios.get(`https://us-central1-challenge-app-eb721.cloudfunctions.net/helloWorld/tasks`).then((response) => { 
     setTaskList(response.data);
     });
 
-  },[])
-
-
+  },[]);
+  useEffect(()=>{
+    console.log(tasksList);
+  },[tasksList])
 
   return ( 
    <div  className="widthGeneral m-auto mt-4">
@@ -34,7 +26,7 @@ export default function Home() {
   <div className="headerTitleContainer px-4 py-4 m-2">
      <Form tasksList={tasksList} setTaskList={setTaskList}></Form>
   </div>
-  <TaskListing></TaskListing>
+  <TaskListing tasksList={tasksList} setTaskList={setTaskList}></TaskListing>
 </div> 
   )
 }
