@@ -1,11 +1,11 @@
 const TaskItem = () => {
     return ( 
-        <div>
+        <div className="item m-2 px-5 py-5 d-flex overflow-hidden">
         <input type="checkbox" />
-        <span ></span>
+        <span className="textStyle" >Hola</span>
            </div>
 
      );
 }
- 
+
 export default TaskItem;

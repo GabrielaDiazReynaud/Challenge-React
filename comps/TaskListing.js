@@ -1,9 +1,9 @@
 import TaskItem from "./TaskItem";
 const  TaskListing = () => {
     return ( 
-        <div>
+        <div className="scrollContainer">
         <div >
-            <TaskItem></TaskItem>
+            <TaskItem ></TaskItem>
         </div>
     </div>
      );
