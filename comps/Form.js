@@ -1,4 +1,23 @@
-const Form = ({tasksList}) => {
+import { useState } from "react";
+
+const Form = ({tasksList,setTaskList}) => {
+    const [taskInput, setTaskInput]=useState("");
+    const addTask = async()=>{
+        const res= await fetch('https://us-central1-challenge-app-eb721.cloudfunctions.net/helloWorld/addTask', {
+            method: 'POST',
+            body: JSON.stringify({
+              task : taskInput
+            }),
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },
+          })
+         const data = await res.json();
+           
+         console.log(data);
+    
+         setTaskList(...tasksList, data[0]);
+    }
     return (  
         <div>
         <div className="mb-3 d-flex flex-wrap justify-content-center align-items-center">
@@ -7,8 +26,9 @@ const Form = ({tasksList}) => {
                 className="m-2 p-1"
                 type="text"
                 id="taskinput"
+                onChange={(e) => setTaskInput(e.target.value)}
             />
-            <button className="btn btn-success">Agregar</button>
+            <button onClick={addTask} className="btn btn-success">Agregar</button>
         </div>
 
         <div className="d-grid gap-2 " >

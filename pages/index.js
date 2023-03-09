@@ -29,7 +29,7 @@ export default function Home() {
    <div  className="widthGeneral m-auto mt-4">
   <h1 id="title" className="text-center">Lista De <span className="spanCss">Quehaceres</span></h1>
   <div className="headerTitleContainer px-4 py-4 m-2">
-     <Form tasksList={tasksList}></Form>
+     <Form tasksList={tasksList} setTaskList={setTaskList}></Form>
   </div>
   <TaskListing></TaskListing>
 </div> 
