@@ -22,10 +22,12 @@ const TaskItem = ( {taskI, tasksList ,setTaskList}) => {
           });
           setTaskList(taskActualizados);
     }
+
+
     return ( 
         <div className="item m-2 px-5 py-5 d-flex overflow-hidden">
-        <input type="checkbox" onChange={updateSelected} />
-        <span className="done">{taskI.task}</span>
+        <input type="checkbox" checked={taskI.selected===true} onChange={updateSelected} />
+        <span className={`${taskI.selected===true ?"done" :"textStyle"}`}>{taskI.task}</span>
            </div>
 
      );

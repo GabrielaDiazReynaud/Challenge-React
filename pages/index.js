@@ -16,9 +16,7 @@ export default function Home() {
     });
 
   },[]);
-  useEffect(()=>{
-    console.log(tasksList);
-  },[tasksList])
+
 
   return ( 
    <div  className="widthGeneral m-auto mt-4">

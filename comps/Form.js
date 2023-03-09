@@ -17,12 +17,10 @@ const Form = ({tasksList,setTaskList}) => {
            
           });
           const updateTasksList = tasksList.filter((taskState) => {
-            console.log(taskState.selected)
             if (taskState.selected === false) {
               return taskState;
             }
           });
-          console.log(updateTasksList);
           setTaskList(updateTasksList);
        
     }
@@ -32,6 +30,7 @@ const Form = ({tasksList,setTaskList}) => {
         });
         setTaskList([]);
     }
+ 
     return (  
         <div>
         <div className="mb-3 d-flex flex-wrap justify-content-center align-items-center">
@@ -40,6 +39,7 @@ const Form = ({tasksList,setTaskList}) => {
                 className="m-2 p-1"
                 type="text"
                 id="taskinput"
+                value={taskInput}
                 onChange={(e) => setTaskInput(e.target.value)}
             />
             <button onClick={addTask} className="btn btn-success">Agregar</button>
