@@ -18,6 +18,17 @@ const Form = ({tasksList,setTaskList}) => {
     
          setTaskList(...tasksList, data[0]);
     }
+    const deleteSelectedTasks=async()=>{
+        const res= await fetch('https://us-central1-challenge-app-eb721.cloudfunctions.net/helloWorld/deleteSelectedTasks',
+        {method:'DELETE'});
+        const data = await res.json();
+        const updateTasksList = tasksList.filter((taskState) => {
+            if (taskState.selected === false) {
+              return pacienteState;
+            }
+          });
+        setTaskList(updateTasksList);
+    }
     return (  
         <div>
         <div className="mb-3 d-flex flex-wrap justify-content-center align-items-center">
@@ -32,7 +43,7 @@ const Form = ({tasksList,setTaskList}) => {
         </div>
 
         <div className="d-grid gap-2 " >
-            <button className="btn btn-primary">Eliminar Tareas Terminadas</button>
+            <button onClick={deleteSelectedTasks}className="btn btn-primary">Eliminar Tareas Terminadas</button>
             <button className="btn btn-dark">Eliminar Todas Las Tareas</button>
         </div>
     </div>
