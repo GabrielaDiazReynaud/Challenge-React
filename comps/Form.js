@@ -1,4 +1,4 @@
-const Form = () => {
+const Form = ({tasksList}) => {
     return (  
         <div>
         <div className="mb-3 d-flex flex-wrap justify-content-center align-items-center">
