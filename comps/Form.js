@@ -1,33 +1,34 @@
 import { useState } from "react";
-
+import axios from "axios";
 const Form = ({tasksList,setTaskList}) => {
     const [taskInput, setTaskInput]=useState("");
-    const addTask = async()=>{
-        const res= await fetch('https://us-central1-challenge-app-eb721.cloudfunctions.net/helloWorld/addTask', {
-            method: 'POST',
-            body: JSON.stringify({
-              task : taskInput
-            }),
-            headers: {
-              'Content-type': 'application/json; charset=UTF-8',
-            },
-          })
-         const data = await res.json();
-           
-         console.log(data);
-    
-         setTaskList(...tasksList, data[0]);
+    const addTask = ()=>{
+        if(taskInput!==""){
+          axios.post(`https://us-central1-challenge-app-eb721.cloudfunctions.net/helloWorld/addTask`, {
+            task : taskInput
+          }).then((response) => {
+            setTaskList([...tasksList,response.data[0]]);
+          });
+        }
+        setTaskInput("");
     }
-    const deleteSelectedTasks=async()=>{
-        const res= await fetch('https://us-central1-challenge-app-eb721.cloudfunctions.net/helloWorld/deleteSelectedTasks',
-        {method:'DELETE'});
-        const data = await res.json();
-        const updateTasksList = tasksList.filter((taskState) => {
+    const deleteSelectedTasks=()=>{
+          axios.delete(`https://us-central1-challenge-app-eb721.cloudfunctions.net/helloWorld/deleteSelectedTasks`).then((response) => {
+           
+          });
+          const updateTasksList = tasksList.filter((taskState) => {
             if (taskState.selected === false) {
-              return pacienteState;
+              return taskState;
             }
           });
-        setTaskList(updateTasksList);
+          setTaskList(updateTasksList);
+       
+    }
+    const deleteAllTasks=()=>{
+        axios.delete(`https://us-central1-challenge-app-eb721.cloudfunctions.net/helloWorld/deleteAllTasks`).then((response) => {
+           
+        });
+        setTaskList([]);
     }
     return (  
         <div>
@@ -43,8 +44,8 @@ const Form = ({tasksList,setTaskList}) => {
         </div>
 
         <div className="d-grid gap-2 " >
-            <button onClick={deleteSelectedTasks}className="btn btn-primary">Eliminar Tareas Terminadas</button>
-            <button className="btn btn-dark">Eliminar Todas Las Tareas</button>
+            <button onClick={deleteSelectedTasks} className="btn btn-primary">Eliminar Tareas Terminadas</button>
+            <button onClick={deleteAllTasks} className="btn btn-dark">Eliminar Todas Las Tareas</button>
         </div>
     </div>
 

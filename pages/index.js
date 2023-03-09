@@ -4,23 +4,26 @@ import { Inter } from 'next/font/google'
 import Form from '../comps/Form'
 import TaskListing from '../comps/TaskListing'
 import { useEffect, useState } from 'react'
-
+import axios from "axios";
 
 
 const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   const [tasksList, setTaskList] = useState([]);
-  const getList = async () => {
-    try {
-      const res = await fetch(`https://us-central1-challenge-app-eb721.cloudfunctions.net/helloWorld/tasks`);
-      const data = await res.json();
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const getList = async () => {
+  //   try {
+  //     const res = await fetch(`https://us-central1-challenge-app-eb721.cloudfunctions.net/helloWorld/tasks`);
+  //     const data = await res.json();
+  //     return data;
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
   useEffect(()=>{
-    setTaskList(getList());
+    axios.get(`https://us-central1-challenge-app-eb721.cloudfunctions.net/helloWorld/tasks`).then((response) => { 
+    setTaskList(response.data);
+    });
+
   },[])
 
 
