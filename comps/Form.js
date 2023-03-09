@@ -1,18 +1,19 @@
 const Form = () => {
     return (  
         <div>
-        <div>
-            <label for="taskinput">Tarea</label>
+        <div className="mb-3 d-flex flex-wrap justify-content-center align-items-center">
+            <label  className="form-label" for="taskinput">Tarea</label>
             <input
+                className="m-2 p-1"
                 type="text"
                 id="taskinput"
             />
-            <button>Agregar</button>
+            <button className="btn btn-success">Agregar</button>
         </div>
 
-        <div >
-            <button>Eliminar Tareas Terminadas</button>
-            <button>Eliminar Todas Las Tareas</button>
+        <div className="d-grid gap-2 " >
+            <button className="btn btn-primary">Eliminar Tareas Terminadas</button>
+            <button class="btn btn-dark">Eliminar Todas Las Tareas</button>
         </div>
     </div>
 
