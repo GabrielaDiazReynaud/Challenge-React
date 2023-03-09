@@ -8,16 +8,9 @@ import axios from "axios";
 
 
 const inter = Inter({ subsets: ['latin'] })
-export default function Home() {
-  const [tasksList, setTaskList] = useState([]);
-  useEffect(()=>{
-    axios.get(`https://us-central1-challenge-app-eb721.cloudfunctions.net/helloWorld/tasks`).then((response) => { 
-    setTaskList(response.data);
-    });
-
-  },[]);
-
-
+export default function Home({data}) {
+  const [tasksList, setTaskList] = useState(data);
+  
   return ( 
    <div  className="widthGeneral m-auto mt-4">
   <h1 id="title" className="text-center">Lista De <span className="spanCss">Quehaceres</span></h1>
@@ -27,4 +20,9 @@ export default function Home() {
   <TaskListing tasksList={tasksList} setTaskList={setTaskList}></TaskListing>
 </div> 
   )
+}
+export async function getServerSideProps() {
+   const x= await axios.get(`https://us-central1-challenge-app-eb721.cloudfunctions.net/helloWorld/tasks`);
+    const data= x.data;
+    return { props: {data } };
 }
