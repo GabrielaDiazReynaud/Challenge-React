@@ -6,8 +6,9 @@ const  TaskListing = ({tasksList ,setTaskList}) => {
             {tasksList.map((taskState) => (
             <TaskItem
               key={taskState.id}
-              task={taskState.task}
-              selected={taskState.selected}
+              taskI={taskState}
+              tasksList={tasksList}
+              setTaskList={setTaskList}
             />
           ))}
         </div>
